@@ -87,15 +87,16 @@
         app:constraint_referenced_ids="content" />
 
     <ImageButton
-        android:id="@+id/stars"
+        android:id="@+id/heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_heart_foreground"
         app:layout_constraintTop_toBottomOf="@id/barrier2"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <TextView
         android:id="@+id/textStars"
@@ -103,9 +104,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="@string/numStars"
-        app:layout_constraintBottom_toBottomOf="@+id/stars"
-        app:layout_constraintStart_toEndOf="@+id/stars"
-        app:layout_constraintTop_toTopOf="@+id/stars" />
+        app:layout_constraintBottom_toBottomOf="@+id/heart"
+        app:layout_constraintStart_toEndOf="@+id/heart"
+        app:layout_constraintTop_toTopOf="@+id/heart" />
 
     <ImageButton
         android:id="@+id/web"
@@ -113,9 +114,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/stars"
+        app:layout_constraintBottom_toBottomOf="@+id/heart"
         app:layout_constraintStart_toEndOf="@+id/textStars"
-        app:layout_constraintTop_toTopOf="@+id/stars"
+        app:layout_constraintTop_toTopOf="@+id/heart"
         app:srcCompat="@android:drawable/ic_menu_share" />
 
     <TextView
@@ -126,7 +127,7 @@
         android:text="@string/numWeb"
         app:layout_constraintBottom_toBottomOf="@+id/web"
         app:layout_constraintStart_toEndOf="@+id/web"
-        app:layout_constraintTop_toTopOf="@+id/stars" />
+        app:layout_constraintTop_toTopOf="@+id/web" />
 
     <TextView
         android:id="@+id/textViews"
@@ -134,19 +135,19 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/numViews"
-        app:layout_constraintBottom_toBottomOf="@+id/stars"
+        app:layout_constraintBottom_toBottomOf="@+id/views"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/stars" />
+        app:layout_constraintTop_toTopOf="@+id/views" />
 
     <ImageView
-        android:id="@+id/Views"
+        android:id="@+id/views"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/stars"
+        app:layout_constraintBottom_toBottomOf="@+id/heart"
         app:layout_constraintEnd_toStartOf="@+id/textViews"
-        app:layout_constraintTop_toTopOf="@+id/stars"
+        app:layout_constraintTop_toTopOf="@+id/heart"
         app:srcCompat="@android:drawable/ic_menu_view" />
 
 
