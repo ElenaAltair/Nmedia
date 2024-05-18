@@ -31,9 +31,9 @@ class MainActivity : AppCompatActivity() {
             author.text = post.author
             dataPublic.text = post.published
             content.text = post.content
-            textStars.text = post.likes.toString()
-            textWeb.text = post.web.toString()
-            textViews.text = post.views.toString()
+            textStars.text = counter(post.likes)
+            textWeb.text = counter(post.web)
+            textViews.text = counter(post.views)
 
             //if (post.likedByMe) {
             //    heart.setImageResource(R.drawable.ic_heart_red_foreground)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     if (post.likedByMe) R.drawable.ic_heart_red_foreground else R.drawable.ic_heart_foreground
                 )
                 if (post.likedByMe) post.likes++ else post.likes--
-                textStars.text = post.likes.toString()
+                textStars.text = counter(post.likes)
             }
 
             //avatar.setOnClickListener{
