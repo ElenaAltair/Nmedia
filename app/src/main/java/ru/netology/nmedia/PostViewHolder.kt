@@ -6,9 +6,10 @@ import java.math.RoundingMode
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val onClickListener: OnClickListener
-    //private val onLikeListener: OnLikeListener
-
+    //private val onClickListener: OnClickListener
+    private val onLikeListener: OnLikeListener,
+    private val onWebListener: OnWebListener,
+    private val onViewsListener: OnViewsListener,
 ) : RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
         binding.apply {
@@ -23,17 +24,14 @@ class PostViewHolder(
                 if (post.likedByMe) R.drawable.ic_heart_red_foreground else R.drawable.ic_heart_foreground
             )
             heart.setOnClickListener {
-                onClickListener(post)
-                //onLikeListener(post)
+                onLikeListener(post)
             }
 
             web.setOnClickListener {
-                onClickListener(post)
-                //onWebListener(post)
+                onWebListener(post)
             }
             views.setOnClickListener {
-                onClickListener(post)
-                //onViewsListener(post)
+                onViewsListener(post)
             }
         }
     }

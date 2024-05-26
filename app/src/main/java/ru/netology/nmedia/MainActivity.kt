@@ -14,11 +14,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        val adapter = PostsAdapter {
-            viewModel.likeById(it.id)
-            viewModel.viewsById(it.id)
-            viewModel.webById(it.id)
-        }
+        val adapter = PostsAdapter (
+            onLikeListener = {
+                viewModel.likeById(it.id)},
+            onViewsListener = {
+                viewModel.viewsById(it.id)},
+            onWebListener = {
+                viewModel.webById(it.id)
+            }
+        )
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
