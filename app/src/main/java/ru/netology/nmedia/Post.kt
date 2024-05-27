@@ -8,5 +8,6 @@ data class Post(
     val likedByMe: Boolean = false,
     val likes: Long,
     val web: Long,
-    val views: Long
+    val views: Long,
+    val contentOld: String,
 )
