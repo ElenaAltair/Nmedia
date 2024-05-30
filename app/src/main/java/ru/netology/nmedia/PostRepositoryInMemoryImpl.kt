@@ -3,6 +3,7 @@ package ru.netology.nmedia
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
+var nextId: Long = 10
 
 class PostRepositoryInMemoryImpl : PostRepository {
     private var posts = listOf(
@@ -17,7 +18,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 6,
@@ -29,7 +33,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 5,
@@ -41,7 +48,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 4,
@@ -53,7 +63,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 3,
@@ -64,7 +77,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 2,
@@ -75,7 +91,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
         Post(
             id = 1,
@@ -85,7 +104,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
             likedByMe = false,
             likes = 0,
             web = 0,
-            views = 0
+            views = 0,
+            contentOld = "",
+            webByMe = false,
+            viewsByMe = false,
         ),
     )
     private val data = MutableLiveData(posts)
@@ -106,14 +128,57 @@ class PostRepositoryInMemoryImpl : PostRepository {
 
     override fun webById(id: Long) {
         posts = posts.map {
-            if (it.id != id) it else it.copy(web = it.web + 1)
+            if (it.id != id) it else it.copy(web = it.web + 1, webByMe = true)
         }
         data.value = posts
     }
 
     override fun viewsById(id: Long) {
         posts = posts.map {
-            if (it.id != id) it else it.copy(views = it.views + 1)
+            if (it.id != id) it else it.copy(views = it.views + 1, viewsByMe = true)
+        }
+        data.value = posts
+    }
+
+
+
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            posts = listOf(
+                post.copy(
+                    id = nextId++,
+                    author = "Me",
+                    likedByMe = false,
+                    published = "Now",
+                    likes = 0,
+                    web = 0,
+                    views = 0,
+                    contentOld = "",
+                    webByMe = false,
+                    viewsByMe = false,
+                )
+            ) + posts
+            data.value = posts
+            return
+        }
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(contentOld = it.content, content = post.content)
+        }
+        data.value = posts
+
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun undoEditById(id: Long) {
+        posts = posts.map {
+            if (it.id != id || it.contentOld.equals("")) it else it.copy(
+                content = it.contentOld,
+                contentOld = ""
+            )
         }
         data.value = posts
     }
