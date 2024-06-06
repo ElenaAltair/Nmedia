@@ -7,4 +7,8 @@ interface PostRepository {
     fun likeById(id: Long)
     fun webById(id: Long)
     fun viewsById(id: Long)
+    fun save(post: Post)
+    fun removeById(id: Long)
+    fun undoEditById(id: Long)
+    fun videoById(id: Long)
 }
