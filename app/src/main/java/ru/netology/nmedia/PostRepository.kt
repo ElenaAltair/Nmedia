@@ -10,5 +10,5 @@ interface PostRepository {
     fun save(post: Post)
     fun removeById(id: Long)
     fun undoEditById(id: Long)
-    //fun menuById(id: Long)
+    fun videoById(id: Long)
 }

@@ -1,11 +1,15 @@
 package ru.netology.nmedia
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 import java.math.RoundingMode
 import java.util.concurrent.TimeUnit
+import android.widget.TextView
 
 class PostViewHolder(
     private val binding: CardPostBinding,
@@ -35,6 +39,12 @@ class PostViewHolder(
             web.isChecked = post.webByMe
             views.isChecked = post.viewsByMe
 
+            if(post.video!=null && post.video != ""){
+                video.visibility = View.VISIBLE
+            }else{
+                video.visibility = View.INVISIBLE
+            }
+
             heart.setOnClickListener {
                 onInteractionListener.onLike(post)
                 //onLikeListener(post)
@@ -50,13 +60,22 @@ class PostViewHolder(
                 //onViewsListener(post)
             }
 
+            video.setOnClickListener{
+                onInteractionListener.onVideo(post)
+            }
+
             menu.setOnClickListener {
 
                 val popupMenu: PopupMenu = PopupMenu(it.context, it)
+
+
                 popupMenu.menuInflater.inflate(R.menu.options_post, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+
                     when (item.itemId) {
                         R.id.remove -> {
+
+
                             onInteractionListener.onRemove(post)
                             true
                         }
@@ -78,30 +97,8 @@ class PostViewHolder(
                 popupMenu.setOnDismissListener {
                     menu.isChecked = false
                 }
-                popupMenu.show()
 
-                /*
-                                PopupMenu(it.context, it).apply {
-                                    inflate(R.menu.options_post)
-                                    setOnMenuItemClickListener { item ->
-                                        when (item.itemId) {
-                                            R.id.remove -> {
-                                                onInteractionListener.onRemove(post)
-                                                true
-                                            }
-                                            R.id.edit -> {
-                                                onInteractionListener.onEdit(post)
-                                                true
-                                            }
-                                            R.id.undoEdit -> {
-                                                onInteractionListener.onUndoEdit(post)
-                                                true
-                                            }
-                                            else -> false
-                                        }
-                                    }
-                                }.show()
-                */
+                popupMenu.show()
 
             }
         }

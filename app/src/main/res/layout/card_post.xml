@@ -66,12 +66,12 @@
         android:checkable="true"
         android:focusable="true"
 
-        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/avatar"
         android:contentDescription="Menu"
         app:icon="@drawable/ic_dots_24dp"
         style="@style/Widget.AppTheme.IconButton"/>
+    <!-- android:background="@android:color/transparent" -->
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"
@@ -135,14 +135,14 @@
               android:layout_marginTop="16dp"
               android:layout_marginStart="16dp"
               android:checkable="true"
-              android:background="@android:color/transparent"
+
               app:icon="@drawable/ic_like_24dp"
               android:text=""
               app:layout_constraintTop_toBottomOf="@id/barrier2"
               app:layout_constraintStart_toStartOf="parent"
               android:contentDescription="Like"
               style="@style/Widget.AppTheme.LikeButton"/>
-
+    <!-- android:background="@android:color/transparent" -->
 <!--
     <TextView
         android:id="@+id/textStars"
@@ -173,13 +173,30 @@
         android:layout_marginStart="16dp"
         android:checkable="true"
         android:text=""
-        android:background="@android:color/transparent"
+
         app:layout_constraintBottom_toBottomOf="@+id/heart"
         app:layout_constraintStart_toEndOf="@+id/heart"
         app:layout_constraintTop_toTopOf="@+id/heart"
         android:contentDescription="Share"
         app:icon="@drawable/ic_share_24dp"
         style="@style/Widget.AppTheme.IconButton"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/video"
+        style="@style/Widget.AppTheme.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:checkable="true"
+
+        android:contentDescription="Video"
+        android:text=""
+        app:icon="@drawable/video_o3bu7vqzk6hc"
+        app:layout_constraintBottom_toBottomOf="@+id/heart"
+        app:layout_constraintStart_toEndOf="@+id/web"
+        app:layout_constraintTop_toTopOf="@+id/heart"
+        tools:visibility="invisible" />
+    <!-- android:background="@android:color/transparent" -->
 <!--
     <TextView
         android:id="@+id/textWeb"
@@ -219,12 +236,13 @@
         android:layout_marginEnd="5dp"
         android:checkable="true"
         android:text="@string/numWeb"
-        android:background="@android:color/transparent"
+
         app:layout_constraintBottom_toBottomOf="@+id/heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/heart"
         android:contentDescription="Eye"
         app:icon="@drawable/ic_eye_24dp"
         style="@style/Widget.AppTheme.IconButton"/>
+    <!-- android:background="@android:color/transparent" -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

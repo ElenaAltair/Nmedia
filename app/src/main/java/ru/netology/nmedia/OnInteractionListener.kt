@@ -7,5 +7,5 @@ interface OnInteractionListener {
     fun onEdit(post: Post) {}
     fun onRemove(post: Post) {}
     fun onUndoEdit(post: Post) {}
-    //fun onMenu(post: Post){}
+    fun onVideo(post: Post) {}
 }

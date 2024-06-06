@@ -15,6 +15,7 @@ private val empty = Post(
     contentOld = "",
     webByMe = false,
     viewsByMe = false,
+    video = null
 )
 
 class PostViewModel : ViewModel() {
@@ -54,4 +55,5 @@ class PostViewModel : ViewModel() {
     fun webById(id: Long) = repository.webById(id)
     fun viewsById(id: Long) = repository.viewsById(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun videoById(id: Long) = repository.videoById(id)
 }

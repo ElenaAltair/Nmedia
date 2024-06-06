@@ -22,6 +22,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
         Post(
             id = 6,
@@ -37,6 +38,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
         Post(
             id = 5,
@@ -52,6 +54,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
         Post(
             id = 4,
@@ -67,6 +70,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
         Post(
             id = 3,
@@ -81,6 +85,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
         Post(
             id = 2,
@@ -95,6 +100,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
         Post(
             id = 1,
@@ -108,6 +114,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             contentOld = "",
             webByMe = false,
             viewsByMe = false,
+            video = null
         ),
     )
     private val data = MutableLiveData(posts)
@@ -156,6 +163,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     contentOld = "",
                     webByMe = false,
                     viewsByMe = false,
+                    video = null
                 )
             ) + posts
             data.value = posts
@@ -182,4 +190,10 @@ class PostRepositoryInMemoryImpl : PostRepository {
         }
         data.value = posts
     }
+
+    override fun videoById(id: Long) {
+        TODO("Not yet implemented")
+    }
+
+
 }

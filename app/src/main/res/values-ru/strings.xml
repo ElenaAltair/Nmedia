@@ -5,4 +5,6 @@
     <string name="dataPublic"></string>
     <string name="Author"></string>
     <string name="content">Текст поста</string>
+    <string name="textSend">Текст...</string>
+    <string name="error_empty_content">Контент не может быть пустым</string>
 </resources>

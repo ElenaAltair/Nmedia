@@ -1,11 +1,17 @@
 package ru.netology.nmedia
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
+
+
+var qqq = 1
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,16 +20,57 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val viewModel: PostViewModel by viewModels()
+
+
+        val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
+            result ?: return@registerForActivityResult
+
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
+        val newPostLauncher2 = registerForActivityResult(NewPostResultContract2()) { result ->
+            result ?: return@registerForActivityResult
+
+            viewModel.changeContent(result)
+            viewModel.save()
+        }
+
+        // Если текст пришлют из внешнего источника в IntelHandlerActivity,
+        // то создаём новый пост,
+        // правда, так как приложение запускается заново, все ранее созданные обновления забываются,
+        // думаю, если хранить данные в БД, это решит проблему
+        val text = intent.getStringExtra(Intent.EXTRA_TEXT)
+        if(text!=null){
+            viewModel.changeContent(text)
+            viewModel.save()
+        }
+
+
         val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onLike(post: Post) {
                 viewModel.likeById(post.id)
+
+                // Тренировка
+                // создание интента для запуска другой активити
+                // val myIntent = Intent(this@MainActivity, IntentHandlerActivity::class.java)
+                // startActivity(myIntent)
+            }
+
+            override fun onVideo(post: Post) {
+                val intent2 = Intent(this@MainActivity, VideoActivity::class.java)
+                val src:String = post.video.toString()
+                intent2.putExtra(Intent.EXTRA_TEXT, src)
+                startActivity(intent2)
+
+                //viewModel.videoById(post.id)
             }
 
             override fun onEdit(post: Post) {
-                //println("override fun onEdit!!!!!")
+                newPostLauncher2.launch(post.content)
                 viewModel.edit(post)
-                //println("override fun onEdit!!!!!")
             }
 
             override fun onRemove(post: Post) {
@@ -31,6 +78,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onWeb(post: Post) {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, post.content)
+                    type = "text/plain"
+                }
+                // Вызываем диалог выбора приложений для отправки текста поста в другое приложение
+                val shareIntent = Intent.createChooser(intent, post.content)
+                startActivity(shareIntent)
                 viewModel.webById(post.id)
             }
 
@@ -43,60 +98,23 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
         binding.list.adapter = adapter
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
 
         viewModel.edited.observe(this) { post ->
-            //println("viewModel.edited.observe")
             if (post.id == 0L) {
                 return@observe
             }
-            //println("viewModel.edited.observe")
-            binding.group.visibility = View.VISIBLE
-            with(binding.content2) {
-                requestFocus()
-                setText(post.content)
-            }
 
         }
 
-
-
-        binding.save.setOnClickListener {
-
-            with(binding.content2) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Content can't be empty",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-                //println("binding.save.setOnClickListener")
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyboard(this)
-                //println("binding.save.setOnClickListener")
-            }
-            binding.group.visibility = View.GONE
+        binding.fab.setOnClickListener {
+            newPostLauncher.launch()
         }
 
-        binding.content2.setOnClickListener() {
-            binding.group.visibility = View.VISIBLE
-        }
-
-        binding.undo.setOnClickListener {
-            viewModel.cancelEdit()
-            binding.content2.setText("")
-            binding.content2.clearFocus()
-            AndroidUtils.hideKeyboard(binding.content2)
-            binding.group.visibility = View.GONE
-        }
 
     }
 

@@ -3,12 +3,15 @@
 
     <item
         android:id="@+id/edit"
-        android:title="Edit" />
+        android:title="Edit"
+         />
     <item
         android:id="@+id/undoEdit"
-        android:title="Undo Edit" />
+        android:title="Undo Edit"
+         />
     <item
         android:id="@+id/remove"
-        android:title="Remove" />
+        android:title="Remove"
+         />
 
 </menu>

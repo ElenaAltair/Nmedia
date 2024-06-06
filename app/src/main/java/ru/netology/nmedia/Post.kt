@@ -12,4 +12,5 @@ data class Post(
     val contentOld: String,
     val webByMe: Boolean = false,
     val viewsByMe: Boolean = false,
+    val video:String?
 )

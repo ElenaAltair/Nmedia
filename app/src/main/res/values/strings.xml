@@ -7,4 +7,6 @@
     <string name="numViews" translatable="false"></string>
     <string name="numWeb" translatable="false"></string>
     <string name="numStars" translatable="false"></string>
+    <string name="textSend">Text...</string>
+    <string name="error_empty_content">Content can\'t be empty</string>
 </resources>
