@@ -39,18 +39,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Если текст пришлют из внешнего источника в IntelHandlerActivity,
-        // то создаём новый пост,
-        // правда, так как приложение запускается заново, все ранее созданные обновления забываются,
-        // думаю, если хранить данные в БД, это решит проблему
-        val text = intent.getStringExtra(Intent.EXTRA_TEXT)
-        if(text!=null){
-            viewModel.changeContent(text)
+        // то создаём новый пост
+        var text1 = intent.getStringExtra(Intent.EXTRA_TEXT)
+        if (text1 != null) {
+            viewModel.changeContent(text1)
             viewModel.save()
+            text1 = null
         }
 
-        fun helpVideo(post: Post){
-            val src:String = post.video.toString()
-            if(src.contains("www.youtube.com")){
+        fun helpVideo(post: Post) {
+            val src: String = post.video.toString()
+            if (src.contains("youtu")) {
 
                 val intent2 = Intent(Intent.ACTION_VIEW).apply {
                     data = Uri.parse(src)
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent2)
                 }
-            }else {
+            } else {
                 val intent2 = Intent(this@MainActivity, VideoActivity::class.java)
                 intent2.putExtra(Intent.EXTRA_TEXT, src)
                 startActivity(intent2)
@@ -78,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             override fun onImageVideo(post: Post) {
                 helpVideo(post)
             }
+
             override fun onVideo(post: Post) {
 
                 helpVideo(post)

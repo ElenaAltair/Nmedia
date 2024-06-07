@@ -150,7 +150,6 @@ class PostRepositoryInMemoryImpl : PostRepository {
     }
 
 
-
     override fun save(post: Post) {
         if (post.id == 0L) {
             posts = listOf(
