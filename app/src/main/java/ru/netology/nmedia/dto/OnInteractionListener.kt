@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.dto
 
 interface OnInteractionListener {
     fun onLike(post: Post) {}
@@ -8,5 +8,6 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
     fun onUndoEdit(post: Post) {}
     fun onVideo(post: Post) {}
-    fun onImageVideo(post: Post){}
+    fun onImageVideo(post: Post) {}
+    fun onContent(post: Post) {}
 }

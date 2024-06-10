@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import android.app.Activity
 import android.content.Context
@@ -20,11 +20,9 @@ API Activity Result API предоставляет предопределённ�
 createIntent() — принимает входные данные и создает интент, который будет в дальнейшем запущен вызовом launch()
 parseResult() — отвечает за возврат результата, обработку resultCode и парсинг данных
  */
-class NewPostResultContract2 : ActivityResultContract<String, String?>() {
-
-    override fun createIntent(context: Context, input: String): Intent {
-        return Intent(context, NewPostActivity::class.java).putExtra(Intent.EXTRA_TEXT, input)
-    }
+class NewPostResultContract : ActivityResultContract<Unit, String?>() {
+    override fun createIntent(context: Context, input: Unit): Intent =
+        Intent(context, NewPostFragment::class.java)
 
     override fun parseResult(resultCode: Int, intent: Intent?): String? =
         if (resultCode == Activity.RESULT_OK) {

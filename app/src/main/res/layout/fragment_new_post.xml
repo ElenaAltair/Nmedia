@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainSend"
+    android:id="@+id/mainEdit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntentHandlerActivity">
+    tools:context=".activity.NewPostFragment">
 
     <EditText
-        android:id="@+id/editTextSend"
+        android:id="@+id/edit"
         android:layout_width="380dp"
         android:layout_height="650dp"
         android:ems="10"
@@ -19,6 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -31,7 +33,7 @@
             app:backgroundTint="@color/design_default_color_primary_variant"
             app:fabAlignmentMode="center"
 
-            />
+           />
         <!-- app:fabAttached="true"
          app:navigationIcon="@drawable/check_circle_fill" -->
 
@@ -45,4 +47,6 @@
             />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

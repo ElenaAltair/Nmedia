@@ -1,9 +1,11 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.repository.PostRepository
+import ru.netology.nmedia.repository.PostRepositoryFileImpl
 
 private val empty = Post(
     id = 0,
@@ -58,5 +60,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun webById(id: Long) = repository.webById(id)
     fun viewsById(id: Long) = repository.viewsById(id)
     fun removeById(id: Long) = repository.removeById(id)
-    fun videoById(id: Long) = repository.videoById(id)
+    fun videoById(post: Post) = repository.videoById(post)
+    fun getAll() = repository.getAll()
+
+
 }

@@ -1,10 +1,13 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.repository
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import ru.netology.nmedia.dto.Post
 
 class PostRepositoryFileImpl(private val context: Context) : PostRepository {
     private val gson = Gson()
@@ -76,7 +79,7 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
                     contentOld = "",
                     webByMe = false,
                     viewsByMe = false,
-                    video = null
+                    video = null  // "https://www.youtube.com/watch?v=UO4wBuB-Lxg"
                 )
             ) + posts
             data.value = posts
@@ -108,8 +111,10 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
 
     }
 
-    override fun videoById(id: Long) {
+    override fun videoById(post: Post) {
         TODO("Not yet implemented")
+
+
     }
 
     private fun sync() {

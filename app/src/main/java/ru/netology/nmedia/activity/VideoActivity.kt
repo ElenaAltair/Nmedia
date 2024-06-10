@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import android.net.Uri
 import android.widget.MediaController
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
-const val YOUTUBE_VIDEO_ID = "Evfe8GEn33w"
-const val YOUTUBE_PLAYLIST = "UCU3jy5C8MB-JvSw_86SFV2w"
+import ru.netology.nmedia.R
+
+
 
 class VideoActivity : AppCompatActivity() {
 

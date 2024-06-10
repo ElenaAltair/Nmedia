@@ -1,7 +1,8 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ru.netology.nmedia.dto.Post
 
 var nextId: Long = 10
 
@@ -192,7 +193,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
         data.value = posts
     }
 
-    override fun videoById(id: Long) {
+    override fun videoById(post: Post) {
         TODO("Not yet implemented")
     }
 
