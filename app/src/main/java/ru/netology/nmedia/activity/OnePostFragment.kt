@@ -1,20 +1,18 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.net.Uri
-
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
-import ru.netology.nmedia.adapter.PostViewHolder
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.R
+import ru.netology.nmedia.activity.NewPostFragment.Companion.textArg
+import ru.netology.nmedia.adapter.PostViewHolder
 import ru.netology.nmedia.databinding.FragmentOnePostBinding
 import ru.netology.nmedia.dto.OnInteractionListener
 import ru.netology.nmedia.dto.Post
@@ -33,10 +31,9 @@ class OnePostFragment : Fragment() {
         val idF = arguments?.textArg
         val viewModel: PostViewModel by activityViewModels()
 
-        var dataL: LiveData<List<Post>> = viewModel.getAll()
-        // находим нужный пост по id
-        val post: Post? = dataL.map {
-            it.find { it.id.toInt() == idF?.toInt() }
+        //ищем нужный пост по id
+        val post: Post? = viewModel.data.map {
+            it.find { id == idF?.toInt() }
         }.value
 
 
@@ -115,19 +112,13 @@ class OnePostFragment : Fragment() {
             }
         }
 
-        
+
         viewModel.data.observe(viewLifecycleOwner) {
-            var data: LiveData<List<Post>> = viewModel.getAll()
-            // находим нужный пост по id
-            val post: Post? = data.map {
-                it.find { it.id.toInt() == idF?.toInt() }
-            }.value
-            binding.postOne.heart.text = post?.likes.toString()
-            binding.postOne.web.text = post?.web.toString()
-            binding.postOne.views.text = post?.views.toString()
-            binding.postOne.content.text = post?.content
-            binding.postOne.views.isChecked = post?.viewsByMe == true
-            binding.postOne.web.isChecked = post?.webByMe == true
+            // находим нужный пост
+            val post: Post? = it.find { it.id.toInt() == idF?.toInt() }
+            if (post != null) {
+                pvh.bind(post)
+            }
         }
 
         return binding.root
