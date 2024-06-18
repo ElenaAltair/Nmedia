@@ -1,14 +1,12 @@
 package ru.netology.nmedia.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.*
 import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.dto.Post
-import ru.netology.nmedia.repository.PostRepository
-import ru.netology.nmedia.repository.PostRepositorySQLiteImpl
+import ru.netology.nmedia.repository.*
 
-public var empty = Post(
+var empty = Post(
     id = 0,
     author = "",
     content = "",
@@ -25,9 +23,8 @@ public var empty = Post(
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
 
-    //private val repository: PostRepository = PostRepositoryFileImpl(application)
-    private val repository: PostRepository = PostRepositorySQLiteImpl(
-        AppDb.getInstance(application).postDao
+    private val repository: PostRepository = PostRepositoryImpl(
+        AppDb.getInstance(context = application).postDao()
     )
 
 
@@ -40,11 +37,6 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }
         edited.value = empty
     }
-
-    fun cancelEdit() {
-        edited.value = empty
-    }
-
 
     fun edit(post: Post) {
         edited.value = post
@@ -67,8 +59,5 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     fun webById(id: Long) = repository.webById(id)
     fun viewsById(id: Long) = repository.viewsById(id)
     fun removeById(id: Long) = repository.removeById(id)
-    fun videoById(post: Post) = repository.videoById(post)
-    fun getAll() = repository.getAll()
-
 
 }

@@ -1,7 +1,5 @@
 package ru.netology.nmedia.activity
 
-import android.R.attr.defaultValue
-import android.R.attr.key
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +38,7 @@ class NewPostFragment : Fragment() {
             }
         }
 
-        
+
         /* Можно вместо
 
         // у наших двух фрагметов общая viewModels, т.е. viewModels каждого из них
