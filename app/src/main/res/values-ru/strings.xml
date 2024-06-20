@@ -7,4 +7,8 @@
     <string name="content">Текст поста</string>
     <string name="textSend">Текст...</string>
     <string name="error_empty_content">Контент не может быть пустым</string>
+    <string name="channel_remote_name">Сервер сообщений</string>
+    <string name="channel_remote_description">Сообщения с удалённого сервера</string>
+    <string name="notification_user_liked">Пользователь %1$s лайкнул %2$s\'s пост</string>
+    <string name="notification_send_new_post">%1$s опубликовал новый пост</string>
 </resources>
